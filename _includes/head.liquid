@@ -1,0 +1,145 @@
+<!-- Metadata, OpenGraph and Schema.org -->
+{% include metadata.liquid %}
+
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"
+>
+<style>
+  :root {
+    --max-content-width: {{ site.max_width | default: '930px' }};
+  }
+</style>
+
+<!-- Tailwind-first core styles -->
+<link rel="stylesheet" href="{{ '/assets/css/tailwind.css' | relative_url | bust_file_cache }}">
+
+{% if site.al_folio.compat.bootstrap.enabled %}
+  <link rel="stylesheet" href="{{ '/assets/css/bootstrap-compat.css' | relative_url | bust_file_cache }}">
+{% endif %}
+
+<!-- Icons -->
+{% if site.plugins contains 'al_icons' %}
+  {% include plugins/al_icons_styles.liquid %}
+{% endif %}
+
+<!-- Code Syntax Highlighting -->
+<link
+  defer
+  rel="stylesheet"
+  href="{{ '/assets/css/jekyll-pygments-themes-github.css' | relative_url | bust_file_cache }}"
+  media=""
+  id="highlight_theme_light"
+>
+
+<!-- Styles -->
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url | bust_css_cache }}">
+<link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+
+{% if site.enable_darkmode %}
+  <script src="{{ '/assets/js/theme.js' | relative_url | bust_file_cache }}"></script>
+  <link
+    defer
+    rel="stylesheet"
+    href="{{ '/assets/css/jekyll-pygments-themes-native.css' | relative_url | bust_file_cache }}"
+    media="none"
+    id="highlight_theme_dark"
+  >
+  <script>
+    initTheme();
+  </script>
+{% endif %}
+
+{% if site.plugins contains 'al_img_tools' %}
+  {% include plugins/al_img_tools_styles.liquid %}
+{% endif %}
+
+{% if site.plugins contains 'al_math' %}
+  {% include plugins/al_math_styles.liquid %}
+{% endif %}
+
+<!-- Global Times New Roman Academic Typography & Wide Responsive Layout -->
+<style>
+  :root {
+    --max-content-width: 1560px !important;
+  }
+
+  .container {
+    max-width: min(92vw, 1560px) !important;
+  }
+
+  /* Optimize TOC + Main Content Ratio on Desktop */
+  @media (min-width: 768px) {
+    .row > .col-sm-3:has(#toc-sidebar) {
+      flex: 0 0 260px !important;
+      max-width: 260px !important;
+    }
+    .row > .col-sm-9:has(#markdown-content),
+    .row > .col-sm-9:has(.post) {
+      flex: 1 1 0% !important;
+      max-width: calc(100% - 260px) !important;
+    }
+  }
+
+  html, body, button, input, select, textarea,
+  h1, h2, h3, h4, h5, h6,
+  .navbar, .navbar-brand, .nav-link, .post-title, .desc, .header-bar h1, .header-bar h2,
+  p, div, span, a, li, blockquote, dt, dd, th, td, label, .post-meta, .post-tags {
+    font-family: "Times New Roman", Times, "Nimbus Roman No9 L", "Songti SC", "SimSun", serif !important;
+  }
+  
+  body {
+    letter-spacing: 0.01em;
+  }
+  
+  .post-title {
+    font-family: "Times New Roman", Times, serif !important;
+    font-weight: 700 !important;
+  }
+  
+  h1, h2, h3, h4 {
+    font-family: "Times New Roman", Times, serif !important;
+  }
+  
+  code, pre, kbd, samp {
+    font-family: "Courier New", Courier, monospace !important;
+  }
+
+  /* Academic Purple Hyperlinks */
+  .post article a:not(.academic-link-btn):not(.post-title),
+  .post #markdown-content a:not(.academic-link-btn):not(.post-title) {
+    color: #7e22ce !important;
+    text-decoration: underline !important;
+    text-underline-offset: 2px;
+  }
+  .post article a:not(.academic-link-btn):not(.post-title):hover,
+  .post #markdown-content a:not(.academic-link-btn):not(.post-title):hover {
+    color: #581c87 !important;
+  }
+  .dark-mode .post article a:not(.academic-link-btn):not(.post-title),
+  .dark-mode .post #markdown-content a:not(.academic-link-btn):not(.post-title) {
+    color: #c084fc !important;
+  }
+
+  /* Prevent images and wide tables from clipping or overflowing */
+  .post article img:not(.profile-img-academic),
+  .post #markdown-content img {
+    max-width: 100% !important;
+    width: auto !important;
+    max-height: 680px;
+    height: auto !important;
+    display: block;
+    margin: 1.5rem auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .post article table,
+  .post #markdown-content table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin: 1.25rem 0;
+  }
+</style>
